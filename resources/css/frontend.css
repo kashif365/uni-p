@@ -1,0 +1,10 @@
+/* Frontend CSS bundle — imports legacy public assets for Vite optimization.
+   Keep this file free of Tailwind directives; Tailwind lives in app.css (admin). */
+
+/* fonts.css uses url("../fonts/...") relative to its own location in
+   public/frontend_assets/css/ — Vite resolves those correctly on build. */
+@import "../../public/frontend_assets/css/fonts.css";
+@import "../../public/frontend_assets/css/home.css";
+@import "../../public/frontend_assets/css/brand.css";
+@import "../../public/frontend_assets/css/responsive-home.css";
+@import "../../public/frontend_assets/css/mobile-optimizations.css";
