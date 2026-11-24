@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head><title th:text="${post.title}">Post</title></head>
+<body>
+<div layout:fragment="content">
+    <article class="mx-auto" style="max-width: 760px">
+        <a class="small" th:href="@{/blog}">&larr; Blog</a>
+        <h1 class="h2 mt-2" th:text="${post.title}"></h1>
+        <p class="text-muted small">
+            By <span th:text="${post.author}"></span> &middot;
+            <span th:text="${#temporals.format(post.createdAt, 'd MMMM yyyy')}"></span>
+            <th:block th:if="${post.category}"> &middot;
+                <a th:href="@{/blog/category/{s}(s=${post.category.slug})}" th:text="${post.category.name}"></a>
+            </th:block>
+        </p>
+        <img th:if="${post.image}" th:src="@{${post.image}}" class="img-fluid rounded mb-4" th:alt="${post.title}">
+        <!-- Post bodies are HTML written by site admins -->
+        <div class="post-content" th:utext="${post.content}"></div>
+    </article>
+
+    <th:block th:unless="${#lists.isEmpty(morePosts)}">
+        <h2 class="section-title h5">More posts</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+            <div class="col" th:each="p : ${morePosts}">
+                <div th:replace="~{fragments :: postCard(${p})}"></div>
+            </div>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

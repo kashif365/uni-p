@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+<head><title>Coupons</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 mb-0">Coupons</h1>
+        <a class="btn brand-btn" th:href="@{/admin/coupons/new}">Add coupon</a>
+    </div>
+    <table class="table table-hover bg-white align-middle">
+        <thead><tr><th>Title</th><th>Store</th><th>Code</th><th>Expires</th><th>Used</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="c : ${coupons}">
+            <td><a th:href="@{/admin/coupons/{id}/edit(id=${c.id})}" th:text="${c.title}"></a>
+                <span class="badge text-bg-info" th:if="${c.featured}">Featured</span></td>
+            <td th:text="${c.store.name}"></td>
+            <td><code th:text="${c.code ?: '-'}"></code></td>
+            <td th:classappend="${c.expired} ? 'text-danger'" th:text="${c.expiresOn != null ? #temporals.format(c.expiresOn, 'd MMM yyyy') : '-'}"></td>
+            <td th:text="${c.usedCount}"></td>
+            <td><span class="badge" th:classappend="${c.active} ? 'text-bg-success' : 'text-bg-secondary'" th:text="${c.active} ? 'Active' : 'Hidden'"></span></td>
+            <td class="text-end"><form th:replace="~{admin/fields :: delete(@{/admin/coupons/{id}/delete(id=${c.id})})}"></form></td>
+        </tr>
+        <tr th:if="${coupons.empty}"><td colspan="7" class="text-muted">No coupons yet.</td></tr>
+        </tbody>
+    </table>
+    <div th:replace="~{fragments :: pager(${coupons}, '/admin/coupons')}"></div>
+</div>
+</body>
+</html>

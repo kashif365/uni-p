@@ -1,1 +1,0 @@
-document.addEventListener("DOMContentLoaded",(function(){})),window.AllModals={init:function(){},open:function(o){const e=document.querySelector(o);e&&(e.style.display="block",document.body.style.overflow="hidden")},close:function(o){const e=document.querySelector(o);e&&(e.style.display="none",document.body.style.overflow="auto")}};

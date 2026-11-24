@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head><title>About us</title></head>
+<body>
+<div layout:fragment="content" class="mx-auto" style="max-width: 760px">
+    <h1 class="h3">About <span th:text="${site.site_name}"></span></h1>
+    <p><span th:text="${site.site_name}"></span> collects student discount codes and deals from campus-friendly
+        brands in one place, so students can find a saving before they pay.</p>
+    <p>This is a university project. The stores and coupon codes on the site are fictional and for demonstration only.</p>
+</div>
+</body>
+</html>

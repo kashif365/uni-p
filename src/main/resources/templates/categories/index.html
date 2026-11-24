@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head><title>Categories</title></head>
+<body>
+<div layout:fragment="content">
+    <h1 class="h3 mb-3">Categories</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+        <div class="col" th:each="c : ${navCategories}">
+            <a class="card store-card h-100 p-3" th:href="@{/categories/{s}(s=${c.slug})}">
+                <div class="fw-semibold" th:text="${c.name}"></div>
+                <div class="small text-muted" th:text="${c.description ?: #lists.size(c.stores) + ' stores'}"></div>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

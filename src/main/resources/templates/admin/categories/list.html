@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+<head><title>Categories</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 mb-0">Categories</h1>
+        <a class="btn brand-btn" th:href="@{/admin/categories/new}">Add category</a>
+    </div>
+    <table class="table table-hover bg-white align-middle">
+        <thead><tr><th>Name</th><th>Slug</th><th>Stores</th><th>Status</th><th>Order</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="c : ${categories}">
+            <td><a th:href="@{/admin/categories/{id}/edit(id=${c.id})}" th:text="${c.name}"></a>
+                <span class="badge text-bg-info" th:if="${c.featured}">Featured</span></td>
+            <td class="small text-muted" th:text="${c.slug}"></td>
+            <td th:text="${#lists.size(c.stores)}"></td>
+            <td><span class="badge" th:classappend="${c.active} ? 'text-bg-success' : 'text-bg-secondary'" th:text="${c.active} ? 'Active' : 'Hidden'"></span></td>
+            <td th:text="${c.sortOrder}"></td>
+            <td class="text-end"><form th:replace="~{admin/fields :: delete(@{/admin/categories/{id}/delete(id=${c.id})})}"></form></td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(categories)}"><td colspan="6" class="text-muted">No categories yet.</td></tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+<head><title>Blog posts</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 mb-0">Blog posts</h1>
+        <a class="btn brand-btn" th:href="@{/admin/blog/new}">Write a post</a>
+    </div>
+    <table class="table table-hover bg-white align-middle">
+        <thead><tr><th>Title</th><th>Category</th><th>Created</th><th>Views</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="p : ${posts}">
+            <td><a th:href="@{/admin/blog/{id}/edit(id=${p.id})}" th:text="${p.title}"></a></td>
+            <td th:text="${p.category?.name ?: '-'}"></td>
+            <td th:text="${#temporals.format(p.createdAt, 'd MMM yyyy')}"></td>
+            <td th:text="${p.views}"></td>
+            <td><span class="badge" th:classappend="${p.published} ? 'text-bg-success' : 'text-bg-secondary'" th:text="${p.published} ? 'Published' : 'Draft'"></span></td>
+            <td class="text-end">
+                <a class="btn btn-sm btn-outline-secondary" th:if="${p.published}" th:href="@{/blog/{s}(s=${p.slug})}" target="_blank">View</a>
+                <form th:replace="~{admin/fields :: delete(@{/admin/blog/{id}/delete(id=${p.id})})}"></form>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(posts)}"><td colspan="6" class="text-muted">No posts yet.</td></tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

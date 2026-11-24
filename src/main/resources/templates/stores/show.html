@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head><title th:text="|${store.name} discount codes|">Store</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex align-items-center gap-3 mb-3">
+        <span th:replace="~{fragments :: logo(${store})}"></span>
+        <div>
+            <h1 class="h3 mb-1" th:text="|${store.name} discount codes|"></h1>
+            <a th:each="c : ${store.categories}" class="badge text-bg-light border text-decoration-none me-1"
+               th:href="@{/categories/{s}(s=${c.slug})}" th:text="${c.name}"></a>
+        </div>
+        <a th:if="${store.websiteUrl}" class="btn btn-outline-secondary ms-auto" target="_blank" rel="noopener"
+           th:href="${store.websiteUrl}">Visit store</a>
+    </div>
+    <p class="text-muted" th:if="${store.description}" th:text="${store.description}"></p>
+
+    <p th:if="${#lists.isEmpty(store.activeCoupons)}" class="text-muted">No coupons for this store right now.</p>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
+        <div class="col" th:each="c : ${store.activeCoupons}">
+            <div th:replace="~{fragments :: coupon(${c})}"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

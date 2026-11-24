@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head><title th:text="${category != null ? category.name + ' - Blog' : 'Blog'}">Blog</title></head>
+<body>
+<div layout:fragment="content">
+    <h1 class="h3 mb-3" th:text="${category != null ? category.name : 'Blog'}">Blog</h1>
+    <div class="d-flex flex-wrap gap-2 mb-4">
+        <a class="btn btn-sm" th:classappend="${category == null} ? 'brand-btn' : 'btn-light border'" th:href="@{/blog}">All</a>
+        <a class="btn btn-sm" th:each="bc : ${blogCategories}"
+           th:classappend="${category != null and category.id == bc.id} ? 'brand-btn' : 'btn-light border'"
+           th:href="@{/blog/category/{s}(s=${bc.slug})}" th:text="${bc.name}"></a>
+    </div>
+
+    <p th:if="${posts.empty}" class="text-muted">No posts yet.</p>
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+        <div class="col" th:each="p : ${posts}">
+            <div th:replace="~{fragments :: postCard(${p})}"></div>
+        </div>
+    </div>
+    <div th:replace="~{fragments :: pager(${posts}, ${category != null ? '/blog/category/' + category.slug : '/blog'})}"></div>
+</div>
+</body>
+</html>

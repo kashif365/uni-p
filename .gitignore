@@ -1,50 +1,15 @@
+# Build output
+/target/
+
+# IDE
+/.idea/
+/.vscode/
+*.iml
+
+# Local files
+.env
 *.log
 .DS_Store
-.env
-.env.backup
-.env.production
-.env.old
-.phpactor.json
-.phpunit.result.cache
-/.fleet
-/.idea
-/.nova
-/.phpunit.cache
-/.vscode
-/.zed
-/auth.json
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/public/storage copy
-/storage/*.key
-/storage/pail
-/storage/logs
-/storage/framework/cache
-/storage/framework/sessions
-/storage/framework/testing
-/storage/framework/views
-/bootstrap/cache/*.php
-/bootstrap/cache/packages.php
-/bootstrap/cache/services.php
-Homestead.json
-Homestead.yaml
 Thumbs.db
-
-# Local project backups and temporary artifacts
-/backup_js_files
-/storage_copy
-/error_log
-
-# Database dumps and archives
-/*.sql
-*.zip
-
-# Keep env template tracked
-!.env.example
-
-/vendor/
 /.claude/
 /.sixth/
-/public/sitemap.xml

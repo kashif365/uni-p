@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+<head><title th:text="${user.id == null} ? 'Add user' : 'Edit user'">User</title></head>
+<body>
+<div layout:fragment="content" style="max-width: 560px">
+    <h1 class="h3 mb-3" th:text="${user.id == null} ? 'Add user' : 'Edit ' + ${user.name}"></h1>
+    <form th:action="${user.id == null} ? @{/admin/users} : @{/admin/users/{id}(id=${user.id})}" th:object="${form}"
+          method="post" class="card card-body">
+        <div th:replace="~{admin/fields :: textField('name', 'Name', 'text')}"></div>
+        <div th:replace="~{admin/fields :: textField('email', 'Email', 'email')}"></div>
+        <div th:replace="~{admin/fields :: textField('password', ${user.id == null} ? 'Password (at least 8 characters)' : 'New password (leave empty to keep the current one)', 'password')}"></div>
+        <div class="mb-3">
+            <label class="form-label" for="role">Role</label>
+            <select class="form-select" th:field="*{role}">
+                <option value="editor">Editor</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+        <div>
+            <button class="btn brand-btn" type="submit">Save</button>
+            <a class="btn btn-link" th:href="@{/admin/users}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

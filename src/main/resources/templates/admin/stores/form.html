@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+<head><title th:text="${store.id == null} ? 'Add store' : 'Edit store'">Store</title></head>
+<body>
+<div layout:fragment="content" style="max-width: 760px">
+    <h1 class="h3 mb-3" th:text="${store.id == null} ? 'Add store' : 'Edit ' + ${store.name}"></h1>
+    <form th:action="${store.id == null} ? @{/admin/stores} : @{/admin/stores/{id}(id=${store.id})}" th:object="${form}"
+          method="post" enctype="multipart/form-data" class="card card-body">
+        <div th:replace="~{admin/fields :: globalErrors}"></div>
+        <div th:replace="~{admin/fields :: textField('name', 'Name', 'text')}"></div>
+        <div th:replace="~{admin/fields :: textField('slug', 'URL slug (leave empty to generate from the name)', 'text')}"></div>
+        <div th:replace="~{admin/fields :: textField('websiteUrl', 'Website URL', 'url')}"></div>
+        <div th:replace="~{admin/fields :: textArea('description', 'Description', 3)}"></div>
+
+        <div class="mb-3">
+            <label class="form-label d-block">Categories</label>
+            <div class="form-check form-check-inline" th:each="c : ${allCategories}">
+                <input class="form-check-input" type="checkbox" th:field="*{categoryIds}" th:value="${c.id}">
+                <label class="form-check-label" th:for="${#ids.prev('categoryIds')}" th:text="${c.name}"></label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="logoFile">Logo</label>
+            <div class="mb-2" th:if="${store.logo}"><span th:replace="~{fragments :: logo(${store})}"></span></div>
+            <input class="form-control" type="file" id="logoFile" name="logoFile" accept="image/*">
+        </div>
+
+        <div class="row align-items-end mb-3">
+            <div class="col-auto">
+                <div th:replace="~{admin/fields :: checkField('active', 'Visible on the site')}"></div>
+                <div th:replace="~{admin/fields :: checkField('featured', 'Featured on the home page')}"></div>
+            </div>
+            <div class="col-3"><div th:replace="~{admin/fields :: textField('sortOrder', 'Sort order', 'number')}"></div></div>
+        </div>
+
+        <div>
+            <button class="btn brand-btn" type="submit">Save</button>
+            <a class="btn btn-link" th:href="@{/admin/stores}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+<head><title>Blog categories</title></head>
+<body>
+<div layout:fragment="content">
+    <h1 class="h3 mb-3">Blog categories</h1>
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <table class="table bg-white align-middle">
+                <thead><tr><th>Name</th><th>Slug</th><th></th></tr></thead>
+                <tbody>
+                <tr th:each="c : ${categories}">
+                    <td th:text="${c.name}"></td>
+                    <td class="small text-muted" th:text="${c.slug}"></td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-secondary" th:href="@{/admin/blog/categories/{id}/edit(id=${c.id})}">Edit</a>
+                        <form th:replace="~{admin/fields :: delete(@{/admin/blog/categories/{id}/delete(id=${c.id})})}"></form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(categories)}"><td colspan="3" class="text-muted">No categories yet.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-5">
+            <form th:action="${editing == null} ? @{/admin/blog/categories} : @{/admin/blog/categories/{id}(id=${editing.id})}"
+                  th:object="${form}" method="post" class="card card-body">
+                <h2 class="h5" th:text="${editing == null} ? 'Add category' : 'Edit category'"></h2>
+                <div th:replace="~{admin/fields :: textField('name', 'Name', 'text')}"></div>
+                <div th:replace="~{admin/fields :: textField('slug', 'URL slug (optional)', 'text')}"></div>
+                <div>
+                    <button class="btn brand-btn" type="submit">Save</button>
+                    <a class="btn btn-link" th:if="${editing != null}" th:href="@{/admin/blog/categories}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

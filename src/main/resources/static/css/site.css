@@ -1,0 +1,31 @@
+/* Campus Deals - small additions on top of Bootstrap. --brand is set from the site settings. */
+:root { --brand: #4a0c98; }
+
+.brand-bg { background: var(--brand); }
+.brand-text { color: var(--brand); }
+.brand-btn { background: var(--brand); border-color: var(--brand); color: #fff; }
+.brand-btn:hover, .brand-btn:focus { filter: brightness(0.9); color: #fff; }
+
+.hero {
+    background: linear-gradient(135deg, var(--brand), #1f2937);
+    color: #fff;
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+}
+.hero .stat { font-size: 1.75rem; font-weight: 700; }
+
+.coupon { border-left: 4px solid var(--brand); transition: box-shadow .15s; }
+.coupon:hover { box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .08); }
+.coupon .reveal.revealed { font-family: monospace; letter-spacing: .1em; background: #fff; color: var(--brand); }
+
+.store-card { text-decoration: none; color: inherit; transition: box-shadow .15s; }
+.store-card:hover { box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .08); }
+.store-logo {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 64px; height: 64px; border-radius: .75rem; background: #f3f4f6;
+    font-size: 1.5rem; font-weight: 700; color: var(--brand); overflow: hidden;
+}
+.store-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+.post-content img { max-width: 100%; height: auto; }
+.section-title { font-weight: 700; margin: 2rem 0 1rem; }

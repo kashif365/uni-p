@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head><title>Privacy policy</title></head>
+<body>
+<div layout:fragment="content" class="mx-auto" style="max-width: 760px">
+    <h1 class="h3">Privacy policy</h1>
+    <p>We only store the information you send us through the contact form (your name, email address and message)
+        so that we can reply. It is not shared with anyone else.</p>
+    <p>The site uses a session cookie to keep you signed in to the admin area and to count coupon uses once per visit.
+        No advertising or tracking cookies are used.</p>
+    <p>To ask for your data to be removed, email <a th:href="|mailto:${site.contact_email}|" th:text="${site.contact_email}"></a>.</p>
+</div>
+</body>
+</html>

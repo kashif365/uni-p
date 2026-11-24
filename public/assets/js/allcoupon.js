@@ -1,1 +1,0 @@
-document.addEventListener("DOMContentLoaded",(function(){})),window.AllCoupons={init:function(){}};

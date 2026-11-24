@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head><title th:text="|Search: ${q}|">Search</title></head>
+<body>
+<div layout:fragment="content">
+    <h1 class="h3 mb-3">Results for "<span th:text="${q}"></span>"</h1>
+    <p th:if="${#lists.isEmpty(stores) and #lists.isEmpty(coupons)}" class="text-muted">
+        Nothing found. Try another store name or offer.
+    </p>
+
+    <th:block th:unless="${#lists.isEmpty(stores)}">
+        <h2 class="section-title h5">Stores</h2>
+        <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-light border" th:each="s : ${stores}" th:href="@{/stores/{slug}(slug=${s.slug})}" th:text="${s.name}"></a>
+        </div>
+    </th:block>
+
+    <th:block th:unless="${#lists.isEmpty(coupons)}">
+        <h2 class="section-title h5">Coupons</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
+            <div class="col" th:each="c : ${coupons}">
+                <div th:replace="~{fragments :: coupon(${c})}"></div>
+            </div>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

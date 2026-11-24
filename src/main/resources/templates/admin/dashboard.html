@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+<head><title>Dashboard</title></head>
+<body>
+<div layout:fragment="content">
+    <h1 class="h3 mb-4">Dashboard</h1>
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-lg-3" th:each="entry : ${counts}">
+            <div class="card p-3">
+                <div class="text-muted small" th:text="${entry.key}"></div>
+                <div class="fs-3 fw-bold" th:text="${entry.value}"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">Latest coupons
+                    <a th:href="@{/admin/coupons/new}">Add coupon</a></div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:each="c : ${latestCoupons}">
+                        <a th:href="@{/admin/coupons/{id}/edit(id=${c.id})}" th:text="${c.title}"></a>
+                        <span class="text-muted small" th:text="|&middot; ${c.store.name}|"></span>
+                    </li>
+                    <li class="list-group-item text-muted" th:if="${#lists.isEmpty(latestCoupons)}">No coupons yet.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">Latest contact messages</div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:each="m : ${messages}">
+                        <div class="fw-semibold" th:text="${m.subject}"></div>
+                        <div class="small text-muted" th:text="|${m.name} <${m.email}> &middot; ${#temporals.format(m.createdAt, 'd MMM yyyy HH:mm')}|"></div>
+                        <div class="small" th:text="${m.message}"></div>
+                    </li>
+                    <li class="list-group-item text-muted" th:if="${#lists.isEmpty(messages)}">No messages yet.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

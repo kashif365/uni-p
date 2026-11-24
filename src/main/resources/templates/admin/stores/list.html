@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+<head><title>Stores</title></head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 mb-0">Stores</h1>
+        <a class="btn brand-btn" th:href="@{/admin/stores/new}">Add store</a>
+    </div>
+    <table class="table table-hover bg-white align-middle">
+        <thead><tr><th>Name</th><th>Categories</th><th>Coupons</th><th>Views</th><th>Status</th><th>Order</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="s : ${stores}">
+            <td><a th:href="@{/admin/stores/{id}/edit(id=${s.id})}" th:text="${s.name}"></a>
+                <span class="badge text-bg-info" th:if="${s.featured}">Featured</span></td>
+            <td class="small" th:text="${#strings.listJoin(s.categories.![name], ', ')}"></td>
+            <td><a th:href="@{/admin/coupons/new(storeId=${s.id})}" th:text="|${#lists.size(s.coupons)} +|"></a></td>
+            <td th:text="${s.views}"></td>
+            <td><span class="badge" th:classappend="${s.active} ? 'text-bg-success' : 'text-bg-secondary'" th:text="${s.active} ? 'Active' : 'Hidden'"></span></td>
+            <td th:text="${s.sortOrder}"></td>
+            <td class="text-end">
+                <a class="btn btn-sm btn-outline-secondary" th:href="@{/stores/{slug}(slug=${s.slug})}" target="_blank">View</a>
+                <form th:replace="~{admin/fields :: delete(@{/admin/stores/{id}/delete(id=${s.id})})}"></form>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(stores)}"><td colspan="7" class="text-muted">No stores yet.</td></tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

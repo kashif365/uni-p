@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head><title>All coupons</title></head>
+<body>
+<div layout:fragment="content">
+    <h1 class="h3 mb-3">All coupons</h1>
+    <p th:if="${coupons.empty}" class="text-muted">No coupons yet.</p>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
+        <div class="col" th:each="c : ${coupons}">
+            <div th:replace="~{fragments :: coupon(${c})}"></div>
+        </div>
+    </div>
+    <div th:replace="~{fragments :: pager(${coupons}, '/coupons')}"></div>
+</div>
+</body>
+</html>

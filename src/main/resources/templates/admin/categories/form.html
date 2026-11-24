@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+<head><title th:text="${category.id == null} ? 'Add category' : 'Edit category'">Category</title></head>
+<body>
+<div layout:fragment="content" style="max-width: 640px">
+    <h1 class="h3 mb-3" th:text="${category.id == null} ? 'Add category' : 'Edit ' + ${category.name}"></h1>
+    <form th:action="${category.id == null} ? @{/admin/categories} : @{/admin/categories/{id}(id=${category.id})}"
+          th:object="${form}" method="post" class="card card-body">
+        <div th:replace="~{admin/fields :: textField('name', 'Name', 'text')}"></div>
+        <div th:replace="~{admin/fields :: textField('slug', 'URL slug (leave empty to generate from the name)', 'text')}"></div>
+        <div th:replace="~{admin/fields :: textArea('description', 'Description', 3)}"></div>
+        <div class="row align-items-end mb-3">
+            <div class="col-auto">
+                <div th:replace="~{admin/fields :: checkField('active', 'Visible')}"></div>
+                <div th:replace="~{admin/fields :: checkField('featured', 'Featured on the home page')}"></div>
+            </div>
+            <div class="col-3"><div th:replace="~{admin/fields :: textField('sortOrder', 'Sort order', 'number')}"></div></div>
+        </div>
+        <div>
+            <button class="btn brand-btn" type="submit">Save</button>
+            <a class="btn btn-link" th:href="@{/admin/categories}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

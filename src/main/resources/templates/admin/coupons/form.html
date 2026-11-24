@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layout}">
+<head><title th:text="${coupon.id == null} ? 'Add coupon' : 'Edit coupon'">Coupon</title></head>
+<body>
+<div layout:fragment="content" style="max-width: 760px">
+    <h1 class="h3 mb-3" th:text="${coupon.id == null} ? 'Add coupon' : 'Edit coupon'"></h1>
+    <form th:action="${coupon.id == null} ? @{/admin/coupons} : @{/admin/coupons/{id}(id=${coupon.id})}" th:object="${form}"
+          method="post" class="card card-body">
+        <div class="mb-3">
+            <label class="form-label" for="storeId">Store</label>
+            <select class="form-select" th:field="*{storeId}" th:errorclass="is-invalid">
+                <option value="">Choose a store...</option>
+                <option th:each="s : ${allStores}" th:value="${s.id}" th:text="${s.name}"></option>
+            </select>
+            <div class="invalid-feedback" th:errors="*{storeId}"></div>
+        </div>
+        <div th:replace="~{admin/fields :: textField('title', 'Title, e.g. 15% off notebooks', 'text')}"></div>
+        <div class="row">
+            <div class="col-md-6"><div th:replace="~{admin/fields :: textField('code', 'Code (leave empty for a deal without a code)', 'text')}"></div></div>
+            <div class="col-md-6"><div th:replace="~{admin/fields :: textField('expiresOn', 'Expires on', 'date')}"></div></div>
+        </div>
+        <div th:replace="~{admin/fields :: textArea('description', 'Description', 2)}"></div>
+        <div th:replace="~{admin/fields :: textArea('terms', 'Terms', 2)}"></div>
+        <div class="row align-items-end mb-3">
+            <div class="col-auto">
+                <div th:replace="~{admin/fields :: checkField('active', 'Visible')}"></div>
+                <div th:replace="~{admin/fields :: checkField('featured', 'Featured')}"></div>
+                <div th:replace="~{admin/fields :: checkField('verified', 'Verified')}"></div>
+                <div th:replace="~{admin/fields :: checkField('exclusive', 'Exclusive')}"></div>
+            </div>
+            <div class="col-3"><div th:replace="~{admin/fields :: textField('sortOrder', 'Sort order', 'number')}"></div></div>
+        </div>
+        <div>
+            <button class="btn brand-btn" type="submit">Save</button>
+            <a class="btn btn-link" th:href="@{/admin/coupons}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head><title th:text="${site.site_tagline}">Home</title></head>
+<body>
+<div layout:fragment="content">
+    <section class="hero mb-5">
+        <h1 class="display-6 fw-bold" th:text="${site.home_heading}"></h1>
+        <p class="lead mb-4" th:text="${site.home_subheading}"></p>
+        <div class="row text-center g-3" style="max-width: 480px">
+            <div class="col"><div class="stat" th:text="${stats.coupons}"></div>coupons</div>
+            <div class="col"><div class="stat" th:text="${stats.stores}"></div>stores</div>
+            <div class="col"><div class="stat" th:text="${stats.categories}"></div>categories</div>
+        </div>
+    </section>
+
+    <h2 class="section-title">Featured coupons</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
+        <div class="col" th:each="c : ${featuredCoupons}">
+            <div th:replace="~{fragments :: coupon(${c})}"></div>
+        </div>
+    </div>
+    <a class="btn btn-outline-secondary mt-3" th:href="@{/coupons}">All coupons</a>
+
+    <h2 class="section-title">Popular stores</h2>
+    <div class="row row-cols-2 row-cols-md-4 g-3">
+        <div class="col" th:each="s : ${featuredStores}">
+            <a class="card store-card h-100 text-center p-3" th:href="@{/stores/{slug}(slug=${s.slug})}">
+                <div><span th:replace="~{fragments :: logo(${s})}"></span></div>
+                <div class="fw-semibold mt-2" th:text="${s.name}"></div>
+            </a>
+        </div>
+    </div>
+
+    <h2 class="section-title">Browse by category</h2>
+    <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-light border" th:each="c : ${featuredCategories}"
+           th:href="@{/categories/{s}(s=${c.slug})}" th:text="${c.name}"></a>
+    </div>
+
+    <th:block th:unless="${#lists.isEmpty(latestPosts)}">
+        <h2 class="section-title">From the blog</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+            <div class="col" th:each="p : ${latestPosts}">
+                <div th:replace="~{fragments :: postCard(${p})}"></div>
+            </div>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>
