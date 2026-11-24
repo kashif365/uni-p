@@ -11,11 +11,11 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.campusdeals</groupId>
-    <artifactId>campus-deals</artifactId>
+    <groupId>com.coupondeals</groupId>
+    <artifactId>coupon-deals</artifactId>
     <version>1.0.0</version>
-    <name>Campus Deals</name>
-    <description>Campus Deals - student coupon and discount site (university project)</description>
+    <name>Coupon Deals</name>
+    <description>Coupon Deals - coupon code and discount website</description>
 
     <properties>
         <java.version>21</java.version>

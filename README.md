@@ -1,6 +1,8 @@
-# Campus Deals
+<img src="src/main/resources/static/img/logo.svg" alt="Coupon Deals" height="48">
 
-A student coupon and discount website, built with **Spring Boot** for a university project.
+# Coupon Deals
+
+A coupon code and discount website built with **Spring Boot**.
 Visitors browse stores, categories and coupon codes, search, read the blog and send a contact message.
 Staff sign in to an admin area to manage the content.
 
@@ -44,18 +46,21 @@ Open http://localhost:8080 for the site and http://localhost:8080/admin for the 
 
 Run the tests with `.\mvnw test`.
 
+See **[HOW-TO-RUN.md](HOW-TO-RUN.md)** for the full step-by-step guide: commands for PowerShell, cmd and
+macOS/Linux, creating and resetting logins, how data is saved and backed up, and importing the MySQL file.
+
 ### Configuration
 
 | Environment variable | Default | Purpose |
 | --- | --- | --- |
 | `PORT` | `8080` | HTTP port |
-| `DB_PATH` | `database/campus-deals.sqlite` | SQLite database file |
+| `DB_PATH` | `database/coupon-deals.sqlite` | SQLite database file |
 | `UPLOAD_DIR` | `uploads` | Folder for uploaded images |
 
 ## Project structure
 
 ```
-src/main/java/com/campusdeals/
+src/main/java/com/coupondeals/
   domain/        JPA entities: Store, Coupon, Category, BlogPost, BlogCategory, User, Setting, ContactMessage
   repository/    Spring Data repositories (queries)
   service/       Settings, file uploads, slugs
@@ -66,7 +71,7 @@ src/main/resources/
   db/migration/  Flyway schema (V1__baseline_schema.sql)
   db/seed/       Demo data
   templates/     Thymeleaf pages (layout.html, fragments.html, admin/...)
-  static/        site.css, site.js
+  static/        site.css, site.js, img/ (SVG logo and favicon)
 src/test/java/   Integration tests
 ```
 

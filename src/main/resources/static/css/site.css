@@ -1,4 +1,4 @@
-/* Campus Deals - small additions on top of Bootstrap. --brand is set from the site settings. */
+/* Coupon Deals - small additions on top of Bootstrap. --brand is set from the site settings. */
 :root { --brand: #4a0c98; }
 
 .brand-bg { background: var(--brand); }

@@ -1,4 +1,4 @@
--- Campus Deals schema
+-- Coupon Deals schema
 
 CREATE TABLE users (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -88,7 +88,7 @@ CREATE TABLE blog_posts (
     excerpt     TEXT,
     content     TEXT    NOT NULL,
     image       TEXT,
-    author      TEXT    NOT NULL DEFAULT 'Campus Deals',
+    author      TEXT    NOT NULL DEFAULT 'Coupon Deals',
     published   INTEGER NOT NULL DEFAULT 0,
     views       INTEGER NOT NULL DEFAULT 0,
     created_at  TEXT,

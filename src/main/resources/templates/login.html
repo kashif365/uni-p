@@ -3,6 +3,7 @@
 <head><title>Admin sign in</title></head>
 <body>
 <div layout:fragment="content" class="mx-auto" style="max-width: 380px">
+    <div class="text-center mb-3"><img th:src="@{/img/logo.svg}" th:alt="${site.site_name}" height="48"></div>
     <h1 class="h4 mb-3">Admin sign in</h1>
     <div class="alert alert-danger" th:if="${param.error}">These credentials do not match our records.</div>
     <div class="alert alert-info" th:if="${param.logout}">You have been signed out.</div>
